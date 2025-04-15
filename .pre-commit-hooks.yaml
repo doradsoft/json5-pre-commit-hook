@@ -3,3 +3,4 @@
   description: Check wether JSON5 files are valid
   entry: check-json5
   language: python
+  types: [json]
