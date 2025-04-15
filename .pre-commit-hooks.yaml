@@ -1,5 +1,5 @@
 - id: check-json5
-  name: JSON5 Checker
+  name: check json5
   description: Check wether JSON5 files are valid
   entry: check-json5
   language: python
