@@ -1,12 +1,14 @@
 '''
-pip package configuration for embedded c coding standard compliance
+pip package configuration for pre-commit-hooks
 '''
 import codecs
 import os
 from setuptools import setup
 
 # pylint: disable-next=consider-using-with
-reqs: list = open("requirements.txt", "r",encoding='utf-8').read().splitlines()
+reqs: list = open("requirements.txt", "r",
+                  encoding='utf-8').read().splitlines()
+
 
 def read(rel_path):
     '''
@@ -18,6 +20,7 @@ def read(rel_path):
     #   https://github.com/pypa/virtualenv/issues/201#issuecomment-3145690
     with codecs.open(os.path.join(here, rel_path), 'r') as file_pointer:
         return file_pointer.read()
+
 
 def get_version(rel_path):
     '''
@@ -36,6 +39,7 @@ def get_version(rel_path):
 
     raise RuntimeError("Unable to find version string.")
 
+
 setup(name='pre_commit_hooks',
       description='C/C++ File formatting and cleanup per coding standards',
       url='https://github.com/delsauce/pre-commit-hooks',
@@ -44,11 +48,11 @@ setup(name='pre_commit_hooks',
       zip_safe=False,
       version=get_version("pre_commit_hooks/__init__.py"),
       entry_points={
-            'console_scripts': [
-                'format-c-source=pre_commit_hooks.format_c_source:main',
-            ],
-        },
+          'console_scripts': [
+              'check-json5=pre_commit_hooks.check_json5:main',
+          ],
+      },
 
       python_requires='>=3.7',
       install_requires=reqs
-)
+      )

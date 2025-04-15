@@ -1,5 +1,5 @@
--    id: format-c-source
-     name: Format 'C' source code
-     description: Uses various tools to format source files to comply with coding standard
-     entry: format-c-source
-     language: python
+- id: check-json5
+  name: JSON5 Checker
+  description: Check wether JSON5 files are valid
+  entry: check-json5
+  language: python
