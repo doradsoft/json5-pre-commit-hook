@@ -5,6 +5,7 @@ from collections.abc import Sequence
 from typing import Any
 
 import json5
+import os
 
 
 def raise_duplicate_keys(ordered_pairs: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -24,6 +25,17 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     retval = 0
     for filename in args.filenames:
+        # Check file size and skip if it's too large
+        try:
+            # TODO: Make this configurable
+            MAX_FILE_SIZE = 1024 * 1024 * 10  # 1 MB
+            if os.path.getsize(filename) > MAX_FILE_SIZE:
+                print(f'{filename}: Skipped (exceeds maximum file size)')
+                continue
+        except OSError as e:
+            print(f'{filename}: Error checking file size ({e})')
+            retval = 1
+            continue
         with open(filename, 'r', encoding='UTF-8') as f:
             try:
                 json5.load(f, object_pairs_hook=raise_duplicate_keys)
